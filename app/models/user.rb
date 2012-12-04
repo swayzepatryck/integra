@@ -21,18 +21,18 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(Time.now.to_s)
   end  
   
-  ###### Carrega relação com as engines <<NAO EDITAR>> #####
-  Dir.glob("engines/*").each do |e| 
-    if File.exists?("#{e}/lib/generators/templates/user")
-      eval File.open("#{e}/lib/generators/templates/user", "rb").read
-      eval "\n"
-    end
-  end
   
   def name_without_accents
     self.name.removeaccents
   end
   
   
+  ###### Carrega relação com as engines <<NAO EDITAR>> #####
+  Dir.glob("engines/*").each do |e| 
+    if File.exists?("#{e}/lib/generators/templates/user")
+      eval File.open("#{e}/lib/generators/templates/user", "rb").read
+      eval "\n"
+    end
+  end  
 end
 
