@@ -1,4 +1,8 @@
 Integra::Application.routes.draw do
+  mount IntegraNews::Engine, :at => "/novidades"
+
+  mount SelecaoAdmin::Engine, :at => "/selecao-admin"
+
   get "enrolled_data_table/index"
   
   get "settings/index"
