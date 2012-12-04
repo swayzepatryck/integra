@@ -1,0 +1,39 @@
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-horizontal'}) do |f| %>
+    <fieldset>
+      <legend><%=t 'devise.sessions.student_or_community.message'%></legend>
+
+	  <div class="control-group">
+		<label for="login" class='control-label'><%=t 'devise.sessions.student_or_community.login'%></label>
+        <div class="controls">
+          <%= f.text_field :login %>
+        </div>
+      </div>
+
+      <div class="control-group">
+		<label for="login" class='control-label'><%=t 'devise.sessions.student_or_community.password'%></label>
+        <div class="controls">
+          <%= f.password_field :password %>
+        </div>
+      </div>
+
+      <% if devise_mapping.rememberable? -%>
+          <div class="control-group">
+            <div class="controls">
+              <label class="checkbox">
+                <%= f.check_box :remember_me, :class => 'control-label' %>
+                <%= t('devise.links.remember_me') %>
+              </label>
+            </div>
+          </div>
+      <% end -%>
+
+
+      <div class="form-actions">
+        <%= f.submit t('devise.links.sign_in'), :class => 'btn btn-primary', :id => 'btn-login' %>
+      </div>
+    </fieldset>
+		<%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
+		  <%= link_to t('devise.links.forgot_your_password'), new_password_path(resource_name) %>
+		<% end -%>
+
+<% end %>		

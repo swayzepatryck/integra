@@ -1,0 +1,40 @@
+<h1>Entrar</h1>
+<hr>
+<% content_for :title do %>
+	Entrar
+<% end %>
+
+	<script src="http://twitter.github.com/bootstrap/1.4.0/bootstrap-modal.js"></script>
+	
+	
+	<div id="employeeLogin" class="modal hide fade" style="padding: 20px;">
+		<%= render 'employee_login'%>
+	</div>
+	
+	<div id="studOrCommLogin" class="modal hide fade" style="padding: 20px;">
+		<%= render 'stud_comm_login'%>
+	</div>
+	
+	<div class="row">
+		<div class="span6" style="margin:0 auto;float:none;">
+			<fieldset>
+			<ul class="thumbnails">
+		    	<li class="span3">
+						<button data-controls-modal="studOrCommLogin" data-backdrop="true" data-keyboard="true" class="btn danger" onmouseover="sandwich='pastrami';" style="text-align: center; font-size: 200px; line-height: 200px;"><i class="icon-group"></i></button>		    			<h2 style="text-align: center">Comunidade/Aluno</h2>
+		    	</li>
+		    	<li class="span3">
+		    			<button data-controls-modal="employeeLogin" data-backdrop="true" data-keyboard="true" class="btn danger" onmouseover="sandwich='pastrami';" style="text-align: center; font-size: 200px; line-height: 200px;"><i class="icon-user"></i></button>
+	    				<h2 style="text-align: center">Servidor IFB</h2>
+		    	</li>
+		    </ul>
+			</legend>
+		</div>
+	</div>
+	<hr/>
+<div class="well">
+	<h3>Ainda não sou cadastrado!</h3>
+	<hr/>
+	<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+	  <%= link_to t('devise.links.sign_up'), new_registration_path(resource_name), {:class => 'btn btn-primary btn-large'} %>
+	<% end -%>	
+</div>

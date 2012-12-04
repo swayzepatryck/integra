@@ -1,0 +1,29 @@
+<h1>Reset de Senha</h1>
+<hr>
+
+<div class="row">
+  <div class="span6" style="margin:0 auto;float:none;">
+<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :class => 'form-horizontal'}) do |f| %>
+  <%= devise_error_messages! %>
+  <div class="well">
+	  <fieldset>
+	    <legend><%= t('devise.links.send_me_reset_password_instructions') %></legend>
+
+	    <div class="control-group">
+	      <%= f.label :email, :class => 'control-label' %>
+	      <div class="controls">
+	        <%= f.email_field :email %>
+	      </div>
+	    </div>
+
+	    <div class="form-actions">
+	        <%= f.submit t('devise.links.send'), :class => 'btn btn-primary' %>
+	     	<%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+	                :back, :class => 'btn' %>
+    
+	    </div>
+	  </fieldset>
+  </div>
+<% end %>
+</div>
+</div>

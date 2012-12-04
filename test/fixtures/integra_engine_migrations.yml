@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  integra_engine: 
+  description: MyString
+  version: MyString
+
+two:
+  integra_engine: 
+  description: MyString
+  version: MyString

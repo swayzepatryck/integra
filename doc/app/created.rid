@@ -1,0 +1,17 @@
+Wed, 26 Sep 2012 10:21:51 -0300
+app/models/integra_engine.rb	Mon, 27 Aug 2012 16:05:52 -0300
+app/controllers/contact_controller.rb	Mon, 20 Aug 2012 10:05:54 -0300
+doc/README_FOR_APP	Mon, 20 Aug 2012 10:05:54 -0300
+app/models/user.rb	Tue, 25 Sep 2012 16:21:13 -0300
+app/models/ability.rb	Wed, 29 Aug 2012 14:06:14 -0300
+app/controllers/users_controller.rb	Mon, 27 Aug 2012 17:32:20 -0300
+app/helpers/contact_helper.rb	Mon, 20 Aug 2012 10:05:54 -0300
+app/helpers/application_helper.rb	Sun, 09 Sep 2012 22:59:48 -0300
+app/controllers/welcome_controller.rb	Mon, 20 Aug 2012 10:05:54 -0300
+app/controllers/application_controller.rb	Sun, 09 Sep 2012 22:56:04 -0300
+app/controllers/registrations_controller.rb	Tue, 28 Aug 2012 18:24:10 -0300
+app/models/role.rb	Tue, 28 Aug 2012 17:42:08 -0300
+app/models/integra_engine_migration.rb	Mon, 20 Aug 2012 10:05:54 -0300
+app/helpers/welcome_helper.rb	Mon, 20 Aug 2012 10:05:54 -0300
+app/helpers/users_helper.rb	Thu, 23 Aug 2012 20:04:46 -0300
+app/controllers/users/omniauth_callbacks_controller.rb	Tue, 25 Sep 2012 16:21:16 -0300

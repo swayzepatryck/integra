@@ -1,0 +1,24 @@
+<form novalidate="noValidate" action="/users/auth/ldap/callback" method="post" class='form-horizontal'>
+	<fieldset>		
+		<legend><%=t 'devise.sessions.employee.message'%></legend>
+		<div class="control-group">
+			<label for="username" class='control-label'><%=t 'devise.sessions.employee.login'%></label>
+			<div class="controls">
+				<input id="username" type="text" name="username">
+			</div>
+		</div>
+	
+		<div class="control-group">
+			<label for="password" class='control-label'><%=t 'devise.sessions.employee.password'%></label>
+			<div class="controls">
+				<input id="password" type="password" name="password">
+			</div>
+		</div>
+		<div class="form-actions">
+			<button type="submit" class='btn btn-primary' id='btn-login' >Entrar</button>
+		</div>		
+	</fieldset>
+</form>		
+<%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
+  <%= link_to t('devise.links.forgot_your_password'), new_password_path(resource_name) %>
+<% end -%>		
