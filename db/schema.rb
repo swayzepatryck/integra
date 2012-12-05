@@ -10,15 +10,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121204182558) do
+ActiveRecord::Schema.define(:version => 20121205153059) do
 
-  create_table "auditings", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "controller"
-    t.string   "action"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "integra_engine_migrateds", :force => true do |t|
+    t.string   "original_version"
+    t.string   "migrated_version"
+    t.integer  "integra_engine_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
+
+  add_index "integra_engine_migrateds", ["integra_engine_id"], :name => "index_integra_engine_migrateds_on_integra_engine_id"
 
   create_table "integra_engines", :force => true do |t|
     t.string   "module_name"
@@ -45,41 +47,6 @@ ActiveRecord::Schema.define(:version => 20121204182558) do
   add_index "integra_news_messages", ["category_id"], :name => "index_integra_news_messages_on_category_id"
   add_index "integra_news_messages", ["user_id"], :name => "index_integra_news_messages_on_user_id"
 
-  create_table "ldapconfs", :force => true do |t|
-    t.string   "rails_env"
-    t.boolean  "ssl"
-    t.string   "admin_password"
-    t.string   "port"
-    t.string   "admin_user"
-    t.string   "attr"
-    t.string   "host"
-    t.string   "base"
-    t.string   "modified_by"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "permissions", :force => true do |t|
-    t.string   "nome"
-    t.string   "descricao"
-    t.string   "modulo"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "controller"
-    t.string   "action"
-  end
-
-  add_index "permissions", ["modulo", "controller", "action"], :name => "unique_mod_contr_act", :unique => true
-
-  create_table "role_permissions", :force => true do |t|
-    t.integer  "role_id"
-    t.integer  "permission_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "role_permissions", ["role_id", "permission_id"], :name => "unique_role_id_permission_id", :unique => true
-
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.integer  "resource_id"
@@ -100,17 +67,17 @@ ActiveRecord::Schema.define(:version => 20121204182558) do
 
   create_table "selecao_admin_addresses", :force => true do |t|
     t.string   "street"
+    t.string   "number"
     t.string   "complement"
     t.string   "neighborhood"
     t.integer  "city_id"
     t.string   "postal_code"
+    t.string   "reference_point"
     t.integer  "address_type_id"
     t.string   "resource_type"
     t.integer  "resource_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
-    t.string   "number"
-    t.string   "reference_point"
   end
 
   add_index "selecao_admin_addresses", ["address_type_id"], :name => "index_selecao_admin_addresses_on_address_type_id"
@@ -147,6 +114,7 @@ ActiveRecord::Schema.define(:version => 20121204182558) do
 
   create_table "selecao_admin_course_prerequisites", :force => true do |t|
     t.integer  "course_id"
+    t.string   "title"
     t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
@@ -307,9 +275,9 @@ ActiveRecord::Schema.define(:version => 20121204182558) do
     t.datetime "start_time"
     t.datetime "end_time"
     t.integer  "number_of_vacancies"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-    t.integer  "lecture_type_id"
+    t.integer  "online_lecture_type_id"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
   end
 
   add_index "selecao_admin_enrollments", ["announcement_id"], :name => "index_selecao_admin_enrollments_on_announcement_id"
@@ -345,6 +313,7 @@ ActiveRecord::Schema.define(:version => 20121204182558) do
     t.integer  "entry_process_mode_id"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
+    t.integer  "online_lecture_id"
   end
 
   add_index "selecao_admin_entry_processes", ["entry_process_mode_id"], :name => "index_selecao_admin_entry_processes_on_entry_process_mode_id"
@@ -399,7 +368,7 @@ ActiveRecord::Schema.define(:version => 20121204182558) do
     t.integer  "code_sequence"
   end
 
-  add_index "selecao_admin_online_lecture_codes", ["lecture_id"], :name => "index_selecao_admin_online_lecture_codes_on_online_lecture_id"
+  add_index "selecao_admin_online_lecture_codes", ["lecture_id"], :name => "index_selecao_admin_online_lecture_codes_on_lecture_id"
 
   create_table "selecao_admin_phone_types", :force => true do |t|
     t.string   "title"
@@ -505,268 +474,6 @@ ActiveRecord::Schema.define(:version => 20121204182558) do
   end
 
   add_index "simple_captcha_data", ["key"], :name => "idx_key"
-
-  create_table "sub_announcements", :force => true do |t|
-    t.string   "desc"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "sub_campus", :force => true do |t|
-    t.string   "desc"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "sub_courses", :force => true do |t|
-    t.string   "desc"
-    t.string   "desc_summary"
-    t.integer  "sub_shift_id"
-    t.text     "prerequisite"
-    t.text     "note"
-    t.integer  "sub_situation_id"
-    t.integer  "sub_campus_id"
-    t.string   "info"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "sub_drawns", :force => true do |t|
-    t.integer  "sub_raffle_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "sub_enrolled_enrollment_id"
-  end
-
-  create_table "sub_enrolled_enrollment_statuses", :force => true do |t|
-    t.string   "desc"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "sub_enrolled_enrollments", :force => true do |t|
-    t.integer  "sub_enrollment_id"
-    t.integer  "sub_vacancy_type_id"
-    t.integer  "sub_enrolled_id"
-    t.integer  "raffle_number"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "sub_enrolled_enrollment_status_id"
-    t.boolean  "requirement"
-  end
-
-  create_table "sub_enrolled_statuses", :force => true do |t|
-    t.string   "desc"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "sub_enrolled_survey_answers", :force => true do |t|
-    t.integer "sub_survey_question_option_id"
-    t.string  "other_option"
-    t.integer "sub_enrolled_enrollment_id"
-  end
-
-  create_table "sub_enrolleds", :force => true do |t|
-    t.date     "birth_date"
-    t.integer  "sub_genre_id"
-    t.integer  "sub_marital_status_id"
-    t.string   "id_number"
-    t.integer  "sub_state_id"
-    t.string   "fathers_name"
-    t.string   "mothers_name"
-    t.string   "street"
-    t.string   "number"
-    t.string   "complement"
-    t.string   "neighborhood"
-    t.string   "city"
-    t.string   "postal_code"
-    t.string   "state"
-    t.string   "phone"
-    t.string   "mobile_phone"
-    t.string   "email"
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "unique_id"
-    t.integer  "sub_enrolled_status_id"
-    t.integer  "user_id"
-  end
-
-  create_table "sub_enrollment_sub_vacancy_types", :force => true do |t|
-    t.integer  "sub_enrollment_id"
-    t.integer  "sub_vacancy_type_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "sub_enrollments", :force => true do |t|
-    t.date     "start_date"
-    t.date     "end_date"
-    t.time     "start_time"
-    t.time     "end_time"
-    t.date     "raffle_result_date"
-    t.time     "raffle_result_time"
-    t.integer  "vacancies_number"
-    t.integer  "survey_id"
-    t.integer  "sub_course_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "sub_announcement_id"
-    t.integer  "sub_selection_process_id"
-  end
-
-  create_table "sub_general_informations", :force => true do |t|
-    t.string   "desc"
-    t.integer  "sub_enrollment_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "sub_genres", :force => true do |t|
-    t.string   "desc"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "sub_lecture_presence_statuses", :force => true do |t|
-    t.string   "desc"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "sub_lecture_presences", :force => true do |t|
-    t.string   "sub_enrolled_unique_id"
-    t.integer  "sub_lecture_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.date     "expiration_date"
-    t.integer  "sub_lecture_presence_status_id"
-  end
-
-  create_table "sub_lecture_presences_bkp", :force => true do |t|
-    t.string   "sub_enrolled_unique_id"
-    t.integer  "sub_lecture_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.date     "expiration_date"
-    t.integer  "sub_lecture_presence_status_id"
-  end
-
-  create_table "sub_lectures", :force => true do |t|
-    t.date     "lecture_date"
-    t.time     "lecture_time"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "subject"
-    t.integer  "sub_campu_id"
-    t.string   "complement"
-    t.integer  "sub_announcement_id"
-    t.integer  "maximum_capacity"
-  end
-
-  create_table "sub_marital_statuses", :force => true do |t|
-    t.string   "desc"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "sub_raffle_lists", :force => true do |t|
-    t.integer  "value"
-    t.integer  "sub_raffle_id"
-    t.integer  "sub_vacancy_type_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "sub_raffles", :force => true do |t|
-    t.date     "raffle_date"
-    t.time     "raffle_time"
-    t.integer  "sub_enrollment_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "employee_id"
-    t.string   "employee_name"
-    t.string   "employee_email"
-    t.string   "employee_phone"
-  end
-
-  create_table "sub_selection_processes", :force => true do |t|
-    t.string   "desc"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "sub_shifts", :force => true do |t|
-    t.string   "desc"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "sub_situations", :force => true do |t|
-    t.string   "desc"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "sub_states", :force => true do |t|
-    t.string   "code"
-    t.string   "state"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "sub_survey_question_options", :force => true do |t|
-    t.integer  "sub_survey_question_id"
-    t.string   "desc"
-    t.boolean  "is_others",              :default => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "sub_survey_questions", :force => true do |t|
-    t.integer  "sub_survey_id"
-    t.string   "question"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "number_of_options"
-  end
-
-  create_table "sub_surveys", :force => true do |t|
-    t.string   "desc"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "sub_user_mail_registration_types", :force => true do |t|
-    t.string   "desc"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "sub_user_mail_registrations", :force => true do |t|
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "sub_enrolled_enrollment_id"
-    t.integer  "sub_user_mail_registration_type_id"
-  end
-
-  create_table "sub_vacancy_types", :force => true do |t|
-    t.string   "desc"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "abbreviation"
-  end
-
-  create_table "user_roles", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "role_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "user_roles", ["role_id", "user_id"], :name => "unique_role_id_user_id", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
