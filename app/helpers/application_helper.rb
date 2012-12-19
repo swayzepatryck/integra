@@ -23,6 +23,20 @@ module ApplicationHelper
 
      model_name			
 	end
+	
+	#### Icone de editar #####
+  def edit_icon
+    "<i class='icon-edit'></i>".html_safe
+  end
+  
+  def destroy_icon
+    "<i class='icon-trash'></i>".html_safe
+  end
+  
+  def back_icon
+    "<i class='icon-circle-arrow-left'></i>".html_safe
+  end
+  
 
    
 end

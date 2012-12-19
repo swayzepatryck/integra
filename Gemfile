@@ -36,6 +36,8 @@ gem 'bootstrap-will_paginate', '0.0.7'
 gem 'galetahub-simple_captcha', :require => 'simple_captcha'
 gem "select2-rails"
 gem 'jQuery-Validation-Engine-rails', '0.0.1'
+gem 'modern-pictograms-rails', '0.0.5'
+gem "paperclip", "2.8.0"
   
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
