@@ -12,7 +12,7 @@ gem 'rolify', '3.1.0'
 gem 'cancan', '1.6.8'
 gem 'omniauth-ldap', '1.0.2'
 gem 'client_side_validations', '3.1.4'
-gem 'chosen-rails'
+gem 'chosen-rails', '0.9.9'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -33,11 +33,12 @@ end
 
 gem 'jquery-rails', '2.0.2'
 gem 'bootstrap-will_paginate', '0.0.7'
-gem 'galetahub-simple_captcha', :require => 'simple_captcha'
-gem "select2-rails"
+gem 'galetahub-simple_captcha', '0.1.3', :require => 'simple_captcha'
+gem "select2-rails", '3.2.1'
 gem 'jQuery-Validation-Engine-rails', '0.0.1'
 gem 'modern-pictograms-rails', '0.0.5'
 gem "paperclip", "2.8.0"
+gem 'fastercsv', '1.5.5'
   
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
