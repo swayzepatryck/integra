@@ -1,14 +1,14 @@
+require 'datatables/users_datatable.rb'
+
 class UsersController < ApplicationController
   load_and_authorize_resource
   
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
-
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => @users }
+      format.json { render :json => UsersDatatable.new(view_context) }
     end
   end
 

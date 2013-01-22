@@ -13,3 +13,24 @@
 dt, dd {
     line-height: 25px;
 }
+
+.dataTables_processing {
+	border-radius: 5px;
+	position: absolute;
+	top: 25%;
+	left: 50%;
+	width: 100px;
+	height: 100px;
+	margin-left: -125px;
+	margin-top: -15px;
+	padding: 10px 10 10px 10px;
+	border: 1px solid #ddd;
+	text-align: center;
+	color: #333333;
+	font-size: 14px;
+	background-color: #CCCCCC;
+	opacity: 0.8;
+	background-image: url('/assets/selecao_admin/ajax-loader.gif');
+	background-repeat: no-repeat;	
+	background-position: center;	
+}
