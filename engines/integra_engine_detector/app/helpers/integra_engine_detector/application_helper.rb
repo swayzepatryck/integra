@@ -38,6 +38,10 @@ module IntegraEngineDetector
        "#{render 'integra_engine_detector/shared/flash_messages' }".html_safe
      end
      
+     def show_modal_flash_messages
+       "#{render 'integra_engine_detector/shared/modal_flash_messages' }".html_safe
+     end
+     
      def get_integra_engines
        integra_engines = Array.new
 

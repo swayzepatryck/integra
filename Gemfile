@@ -13,6 +13,8 @@ gem 'cancan', '1.6.8'
 gem 'omniauth-ldap', '1.0.2'
 gem 'client_side_validations', '3.1.4'
 gem 'chosen-rails', '0.9.9'
+gem 'hirb'
+gem 'hirb-unicode'
 
 # Gems used only for assets and not required
 # in production environments by default.
