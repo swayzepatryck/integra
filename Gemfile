@@ -15,6 +15,7 @@ gem 'client_side_validations', '3.1.4'
 gem 'chosen-rails', '0.9.9'
 gem 'hirb'
 gem 'hirb-unicode'
+gem 'prawn'
 
 # Gems used only for assets and not required
 # in production environments by default.
